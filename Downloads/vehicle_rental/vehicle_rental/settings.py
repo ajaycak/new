@@ -32,7 +32,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vehicle_rental_db',  # Database name
         'USER': 'root',  # MySQL username
-        'PASSWORD': '2406',  # MySQL password
+        'PASSWORD': '2506',  # MySQL password
         'HOST': 'localhost',  # MySQL host
         'PORT': '3306',  # MySQL port
     }
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rentals',
 ]
 
 MIDDLEWARE = [
@@ -63,10 +64,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'vehicle_rental.urls'
 
+STATIC_URL = '/static/'
+
+
+import os
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'rentals', 'templates', 'rentals')],   # Pointing to the 'templates' folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,18 +85,13 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'vehicle_rental.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -123,6 +124,16 @@ USE_I18N = True
 
 USE_TZ = True
 
+MEDIA_URL = '/media/'
+
+STATIC_URL = '/static/'
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -133,3 +144,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#EMAILSS
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Use the SMTP server of your email provider
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'at21csm010@gmail.com'
+EMAIL_HOST_PASSWORD = 'MPAAK1234'  # Ensure you use the correct password or app password
+DEFAULT_FROM_EMAIL = 'at21csm010@gmail.com'
